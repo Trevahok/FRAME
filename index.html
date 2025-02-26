@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRAME: Video Feature Representation with Anticipation and Memory</title>
+    <style>
+        :root {
+            --primary-color: #21437a;
+            --secondary-color: #f5f5f5;
+            --accent-color: #3166FF;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .figure {
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .figure img {
+            max-width: 100%;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .figure-caption {
+            margin-top: 15px;
+            font-style: italic;
+            color: #555;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 0.9rem;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: var(--secondary-color);
+        }
+        
+        .highlight {
+            background-color: rgba(49, 102, 255, 0.1);
+            font-weight: bold;
+        }
+        
+        .abstract {
+            background-color: var(--secondary-color);
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 40px;
+            text-align: justify;
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .column {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .authors {
+            margin: 15px 0;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .authors a {
+            color: var(--primary-color);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .authors a:hover {
+            color: var(--accent-color);
+        }
+        
+        .authors a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        .authors a:hover::after {
+            width: 100%;
+        }
+        
+        .video-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 40px 0;
+        }
+        
+        .video-wrapper {
+            width: 80%;
+            max-width: 900px;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            padding: 10px;
+            background-color: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .video-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+        }
+        
+        .video-wrapper video {
+            width: 100%;
+            display: block;
+            border-radius: 4px;
+        }
+        
+        .video-caption {
+            margin-top: 15px;
+            font-style: italic;
+            color: #555;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .video-wrapper {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>FRAME: A Simple Pre-Training Method for Learning Video Feature Representation with Anticipation and Memory</h1>
+        <div class="authors">
+            <p>
+                <a href="mailto:sethu2@illinois.edu">Sethuraman TV</a> &nbsp;&nbsp;
+                <a href="mailto:savyak2@illinois.edu">Savya Khosla</a> &nbsp;&nbsp;
+                <a href="mailto:vs13@illinois.edu">Vignesh Srinivasakumar</a>
+            </p>
+        </div>
+    </header>
+    <section class="section">
+        <div class="abstract">
+            <p>Video understanding requires models to process both spatial and temporal information effectively. While recent approaches extend successful image-based self-supervised techniques to videos, they often underperform compared to traditional image encoders like CLIP and DINO. We present FRAME, a lightweight video-frame encoder that bridges this gap by learning from well-established image encoders while leveraging the temporal continuity in video data. Our method combines three key ideas: (1) simultaneous distillation of DINO's patch-level features and CLIP's semantic representations, (2) integration of a memory mechanism for temporal consistency, and (3) anticipation of future frame encodings as a self-supervised learning signal. Our experimental results demonstrate that FRAME matches CLIP and DINO's performance on classification and semantic segmentation tasks while significantly outperforming existing self-supervised models on label propagation tasks. The model achieves this while maintaining a compact architecture that can be readily extended through task-specific decoders.</p>
+        </div>
+    </section>
+     
+    <section class="section">
+        <div class="video-container">
+            <div class="video-wrapper">
+                <video controls autoplay muted loop>
+                    <source src="figures/0.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-caption">
+                    <strong>Demo 1:</strong> FRAME model tracking and segmenting objects across video frames, demonstrating robust temporal consistency even with occlusions and camera motion.
+                </div>
+            </div>
+            
+            <div class="video-wrapper">
+                <video controls autoplay muted loop>
+                    <source src="figures/9.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-caption">
+                    <strong>Demo 2:</strong> FRAME's anticipation capabilities shown through accurate prediction of object movement and semantic segmentation in complex scenes.
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="section">
+        <h2>Framework Overview</h2>
+        <div class="figure">
+            <img src="figures/framework.png" alt="FRAME Architecture and Two-Stage Training Process">
+            <div class="figure-caption">
+                <strong>Figure 1:</strong> Overview of FRAME Architecture and Two-Stage Training Process. In Stage 1, the encoder is trained to jointly distill CLIP features (providing semantic understanding) and DINO features (providing spatial understanding). In Stage 2, this pre-trained encoder processes the past and current frames and the model is optimized for memory integration and future anticipation.
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <h2>Visual Correspondence Results</h2>
+        <table>
+            <tr>
+                <th>Method</th>
+                <th>Backbone</th>
+                <th>Dataset</th>
+                <th colspan="3">DAVIS</th>
+                <th>VIP</th>
+                <th>JHMDB</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>J&F<sub>m</sub></th>
+                <th>J<sub>m</sub></th>
+                <th>F<sub>m</sub></th>
+                <th>mIoU</th>
+                <th>PCK@0.1 / PCK@0.2</th>
+            </tr>
+            <tr>
+                <td>DINO</td>
+                <td>ViT-S/16</td>
+                <td>ImageNet</td>
+                <td>61.8</td>
+                <td>60.2</td>
+                <td>63.4</td>
+                <td>36.2</td>
+                <td>45.6 / 75.0</td>
+            </tr>
+            <tr>
+                <td>SiamMAE</td>
+                <td>ViT-S/16</td>
+                <td>Kinetics</td>
+                <td>62.0</td>
+                <td>60.3</td>
+                <td>63.7</td>
+                <td>37.3</td>
+                <td>47.0 / 76.1</td>
+            </tr>
+            <tr class="highlight">
+                <td><strong>FRAME</strong></td>
+                <td><strong>ViT-S/16</strong></td>
+                <td><strong>Kinetics</strong></td>
+                <td><strong>65.6</strong></td>
+                <td><strong>62.1</strong></td>
+                <td><strong>69.1</strong></td>
+                <td><strong>41.2</strong></td>
+                <td><strong>48.7 / 79.2</strong></td>
+            </tr>
+            <tr class="highlight">
+                <td><strong>FRAME</strong></td>
+                <td><strong>ViT-S/16</strong></td>
+                <td><strong>Kinetics+Ego4D</strong></td>
+                <td><strong>66.3</strong></td>
+                <td><strong>63.0</strong></td>
+                <td><strong>69.7</strong></td>
+                <td><strong>42.0</strong></td>
+                <td><strong>49.0 / 79.3</strong></td>
+            </tr>
+            <tr>
+                <td>DINO</td>
+                <td>ViT-S/8</td>
+                <td>ImageNet</td>
+                <td>69.9</td>
+                <td>66.6</td>
+                <td>73.1</td>
+                <td>39.5</td>
+                <td>56.5 / 80.3</td>
+            </tr>
+            <tr>
+                <td>SiamMAE</td>
+                <td>ViT-S/8</td>
+                <td>Kinetics</td>
+                <td>71.4</td>
+                <td>68.4</td>
+                <td>74.5</td>
+                <td>45.9</td>
+                <td>61.9 / 83.8</td>
+            </tr>
+            <tr class="highlight">
+                <td><strong>FRAME</strong></td>
+                <td><strong>ViT-S/8</strong></td>
+                <td><strong>Kinetics</strong></td>
+                <td><strong>73.2</strong></td>
+                <td><strong>69.5</strong></td>
+                <td><strong>77.0</strong></td>
+                <td><strong>47.9</strong></td>
+                <td><strong>64.1 / 82.9</strong></td>
+            </tr>
+            <tr class="highlight">
+                <td><strong>FRAME</strong></td>
+                <td><strong>ViT-S/8</strong></td>
+                <td><strong>Kinetics+Ego4D</strong></td>
+                <td><strong>74.4</strong></td>
+                <td><strong>69.9</strong></td>
+                <td><strong>79.0</strong></td>
+                <td><strong>48.2</strong></td>
+                <td><strong>64.3 / 83.0</strong></td>
+            </tr>
+        </table>
+        <div class="figure-caption">
+            <strong>Table 1:</strong> Semi-supervised visual correspondence task comparison. We compare performance on DAVIS, VIP, and JHMDB datasets.
+        </div>
+    </section>
+    
+    <section class="section">
+        <h2>Qualitative Results</h2>
+        <div class="container">
+            <div class="column">
+                <div class="figure">
+                    <img src="figures/Figure_1.png" alt="Video Object Segmentation">
+                    <div class="figure-caption">
+                        <strong>Figure 2(a):</strong> Video Object Segmentation
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="figure">
+                    <img src="figures/Figure_2.png" alt="Semantic Part Propagation">
+                    <div class="figure-caption">
+                        <strong>Figure 2(b):</strong> Semantic Part Propagation
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="figure">
+            <img src="figures/Figure_3.png" alt="Pose Propagation">
+            <div class="figure-caption">
+                <strong>Figure 2(c):</strong> Pose Propagation
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <h2>Semantic Segmentation Results</h2>
+        <table>
+            <tr>
+                <th rowspan="2">Model</th>
+                <th colspan="2">CamVid (mIoU)</th>
+            </tr>
+            <tr>
+                <th>Current Frame</th>
+                <th>Future Frame</th>
+            </tr>
+            <tr>
+                <td>DINO ViT-S/16</td>
+                <td>32.0</td>
+                <td>25.3</td>
+            </tr>
+            <tr class="highlight">
+                <td><strong>FRAME ViT-S/16</strong></td>
+                <td><strong>35.1</strong></td>
+                <td><strong>28.5</strong></td>
+            </tr>
+            <tr>
+                <td>DINO ViT-S/8</td>
+                <td>32.3</td>
+                <td>21.1</td>
+            </tr>
+            <tr class="highlight">
+                <td><strong>FRAME ViT-S/8</strong></td>
+                <td><strong>34.2</strong></td>
+                <td><strong>25.4</strong></td>
+            </tr>
+        </table>
+        <div class="figure-caption">
+            <strong>Table 2:</strong> Video semantic segmentation comparison on CamVid. FRAME outperforms DINO across architectures for semantic segmentation in both current and future frames.
+        </div>
+        
+        <div class="figure">
+            <object data="figures/Paper_graph_3-cropped.pdf" type="application/pdf" width="100%" height="500px">
+                <p>Your browser doesn't support PDF viewing. 
+                <a href="figures/Paper_graph_3-cropped.pdf">Download the PDF</a> to view it.</p>
+            </object>
+            <div class="figure-caption">
+                <strong>Figure 3:</strong> Qualitative examples depicting semantic segmentation results on CamVid
+            </div>
+        </div>
+        
+        <div class="figure">
+            <img src="figures/output (1).png" alt="Semantic segmentation on current and future frames">
+            <div class="figure-caption">
+                <strong>Figure 4:</strong> Semantic segmentation on current and future frames. We compare FRAME and DINO for semantic segmentation prediction in current and future frames on the CamVid dataset, and find that FRAME outperforms DINO by a significant margin.
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <h2>Action Classification Results</h2>
+        <table>
+            <tr>
+                <th rowspan="2">Model</th>
+                <th colspan="2">Zero Shot (%)</th>
+                <th colspan="2">Linear (%)</th>
+            </tr>
+            <tr>
+                <th>HMDB-51</th>
+                <th>UCF-101</th>
+                <th>HMDB-51</th>
+                <th>UCF-101</th>
+            </tr>
+            <tr>
+                <td><strong>CLIP</strong></td>
+                <td><strong>50.5</strong></td>
+                <td><strong>58.7</strong></td>
+                <td><strong>75.1</strong></td>
+                <td><strong>68.5</strong></td>
+            </tr>
+            <tr>
+                <td>FRAME</td>
+                <td>48.7</td>
+                <td>54.9</td>
+                <td>74.5</td>
+                <td>65.3</td>
+            </tr>
+        </table>
+        <div class="figure-caption">
+            <strong>Table 3:</strong> Video activity classification comparison. FRAME performs comparably to CLIP's visual encoder in zero-shot and linear classification settings.
+        </div>
+    </section>
+    
+    <section class="section">
+        <h2>Ablation Studies</h2>
+        <table>
+            <tr>
+                <th>Anticipation</th>
+                <th>Memory</th>
+                <th>Stage 2 ViT</th>
+                <th>Pretrained on</th>
+                <th>DAVIS J&F<sub>m</sub></th>
+                <th>VIP mIoU</th>
+                <th>JHMDB PCK@0.1</th>
+                <th>CamVid mIoU</th>
+                <th>HMDB-51 %</th>
+                <th>UCF-100 %</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>N/A</td>
+                <td>Kinetics</td>
+                <td>62.1</td>
+                <td>39.0</td>
+                <td>46.6</td>
+                <td>29.6</td>
+                <td>47.8</td>
+                <td>53.7</td>
+            </tr>
+            <tr>
+                <td>✓</td>
+                <td></td>
+                <td>N/A</td>
+                <td>Kinetics</td>
+                <td>63.2</td>
+                <td>38.3</td>
+                <td>45.9</td>
+                <td>31.2</td>
+                <td>47.5</td>
+                <td>52.2</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>✓</td>
+                <td>Learned</td>
+                <td>Kinetics</td>
+                <td>65.1</td>
+                <td>39.8</td>
+                <td>47.5</td>
+                <td>33.4</td>
+                <td>48.2</td>
+                <td>51.4</td>
+            </tr>
+            <tr>
+                <td>✓</td>
+                <td>✓</td>
+                <td>Learned</td>
+                <td>Kinetics</td>
+                <td>65.4</td>
+                <td>40.4</td>
+                <td>47.9</td>
+                <td>33.1</td>
+                <td>45.4</td>
+                <td>53.4</td>
+            </tr>
+            <tr class="highlight">
+                <td>✓</td>
+                <td>✓</td>
+                <td>Frozen</td>
+                <td>Kinetics</td>
+                <td>65.6</td>
+                <td>41.2</td>
+                <td>48.7</td>
+                <td>33.9</td>
+                <td>48.9</td>
+                <td>53.7</td>
+            </tr>
+            <tr class="highlight">
+                <td>✓</td>
+                <td>✓</td>
+                <td>Frozen</td>
+                <td>Kinetics + Ego4D</td>
+                <td>66.3</td>
+                <td>42.0</td>
+                <td>49.0</td>
+                <td>35.1</td>
+                <td>48.7</td>
+                <td>54.9</td>
+            </tr>
+        </table>
+        <div class="figure-caption">
+            <strong>Table 4:</strong> Ablations. We evaluate the contributions of anticipation, memory, stage 2 training setup, and dataset diversity in the FRAME encoder. The inclusion of memory and anticipation mechanisms improves performance overall, with additional gains observed when using a frozen encoder in stage 2. Pretraining on a diverse dataset, including Ego4D, further boosts performance, particularly for CamVid.
+        </div>
+    </section>
+    
+    <section class="section">
+        <h2>Resolution Analysis</h2>
+        <div class="figure">
+            <img src="figures/output.png" alt="Performance Across Image Resolutions">
+            <div class="figure-caption">
+                <strong>Figure 5:</strong> Performance Across Image Resolutions. We analyze model performance across varying image resolutions, ranging from 224×224 to 720×720, highlighting the impact of resolution on model accuracy and efficiency.
+            </div>
+        </div>
+    </section>
+</body>
+</html> 
