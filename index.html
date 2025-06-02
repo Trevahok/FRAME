@@ -176,7 +176,7 @@
             FRAME is trained in two stages. In Stage 1, we train a student encoder to match dense patch-level and class-level features from frozen image-based teacher models (DINO and CLIP). In Stage 2, we equip the student with lightweight temporal modules—a memory unit that aggregates past context and an anticipation unit that predicts future features.
           </p>
         </div>
-        <img src="../figures/framework.png" alt="FRAME Framework" class="center">
+        <img src="figures/framework.png" alt="FRAME Framework" class="center">
         <h2 class="subtitle has-text-centered">
           Overview of FRAME Architecture and Two-Stage Training Process. In Stage 1, the encoder is trained to jointly distill CLIP features (providing semantic understanding) and DINO features (providing spatial understanding). In Stage 2, this pre-trained encoder processes the past and current frames and the model is optimized for memory integration and future anticipation.
         </h2>
@@ -193,21 +193,21 @@
       <div id="results-carousel" class="carousel results-carousel">
        <div class="item">
         <!-- Your image here -->
-        <img src="../figures/Figure_1.png" alt="Video Object Segmentation Results"/>
+        <img src="figures/Figure_1.png" alt="Video Object Segmentation Results"/>
         <h2 class="subtitle has-text-centered">
           Video Object Segmentation on DAVIS: FRAME provides more robust segmentation across frames.
         </h2>
       </div>
       <div class="item">
         <!-- Your image here -->
-        <img src="../figures/Figure_2.png" alt="Semantic Part Propagation Results"/>
+        <img src="figures/Figure_2.png" alt="Semantic Part Propagation Results"/>
         <h2 class="subtitle has-text-centered">
           Semantic Part Propagation on VIP: FRAME accurately tracks semantic parts over time.
         </h2>
       </div>
       <div class="item">
         <!-- Your image here -->
-        <img src="../figures/Figure_3.png" alt="Pose Propagation Results"/>
+        <img src="figures/Figure_3.png" alt="Pose Propagation Results"/>
         <h2 class="subtitle has-text-centered">
          Pose Propagation on JHMDB: FRAME maintains keypoint correspondence across frames.
        </h2>
@@ -309,44 +309,41 @@
     </div>
   </div>
 </section>
-
-<!-- Video Demonstration -->
-<section class="hero is-small is-light">
+<!-- Video carousel -->
+<section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <h2 class="title is-3 has-text-centered">Video Demonstrations</h2>
-      <div class="columns is-multiline">
-        <div class="column is-half">
-          <div class="content">
-            <h4 class="title is-4">Video Object Segmentation</h4>
-            <video controls width="100%">
-              <source src="static/videos/16.mp4" type="video/mp4">
-            </video>
-            <p>FRAME provides consistent object segmentation across challenging scenarios.</p>
-          </div>
+      <h2 class="title is-3 has-text-centered">Video Examples</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+          <video poster="" id="video1" autoplay controls muted loop height="100%">
+            <source src="static/videos/16.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">
+            Video Object Segmentation: FRAME provides consistent object segmentation across challenging scenarios.
+          </h2>
         </div>
-        <div class="column is-half">
-          <div class="content">
-            <h4 class="title is-4">Part Propagation</h4>
-            <video controls width="100%">
-              <source src="static/videos/21.mp4" type="video/mp4">
-            </video>
-            <p>Semantic part tracking demonstrates FRAME's fine-grained correspondence capabilities.</p>
-          </div>
+        <div class="item item-video2">
+          <video poster="" id="video2" autoplay controls muted loop height="100%">
+            <source src="static/videos/21.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">
+            Part Propagation: Semantic part tracking demonstrates FRAME's fine-grained correspondence capabilities.
+          </h2>
         </div>
-        <div class="column is-half">
-          <div class="content">
-            <h4 class="title is-4">Pose Tracking</h4>
-            <video controls width="100%">
-              <source src="static/videos/29.mp4" type="video/mp4">
-            </video>
-            <p>FRAME maintains accurate keypoint correspondence across frames.</p>
-          </div>
+        <div class="item item-video3">
+          <video poster="" id="video3" autoplay controls muted loop height="100%">
+            <source src="static/videos/29.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">
+            Pose Tracking: FRAME maintains accurate keypoint correspondence across frames.
+          </h2>
         </div>
       </div>
     </div>
   </div>
 </section>
+<!-- End video carousel -->
 
 <!-- Ablation Studies -->
 <section class="section">
@@ -487,21 +484,6 @@
 </section>
 <!--End BibTex citation -->
 
-<footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
 
 </body>
 </html>
