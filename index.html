@@ -53,18 +53,34 @@
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
               <span class="author-block">
-                <a href="#" target="_blank">Anonymous Authors</a><sup>*</sup>,</span>
-                <span class="author-block">
-                  <a href="#" target="_blank">Anonymous Authors</a><sup>*</sup>,</span>
-                  <span class="author-block">
-                    <a href="#" target="_blank">Anonymous Authors</a>
-                  </span>
-                  </div>
+                <a href="#" target="_blank">Sethuraman T V</a><sup>1,2</sup>,</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Savya Khosla</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Vignesh Srinivasakumar</a><sup>2†</sup>,</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Jiahui Huang</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Seoung Wug Oh</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Simon Jenni</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Derek Hoiem</a><sup>2*</sup>,</span>
+              <span class="author-block">
+                <a href="#" target="_blank">Joon-Young Lee</a><sup>1*</sup>
+              </span>
+            </div>
 
-                  <div class="is-size-5 publication-authors">
-                    <span class="author-block">Anonymous Institution<br>NeurIPS 2025</span>
-                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
-                  </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <span style="color: #FF0000;">Adobe Research</span><sup>1</sup>, 
+                <span style="color: #13294B;">University of Illinois Urbana-Champaign</span><sup>2</sup><br>
+                NeurIPS 2025
+              </span>
+              <span class="eql-cntrb">
+                <small><br><sup>*</sup>Equal advising, <sup>†</sup>Now at <span style="color: #76B900;">NVIDIA</span></small>
+              </span>
+            </div>
 
                   <div class="column has-text-centered">
                     <div class="publication-links">
@@ -119,21 +135,18 @@
   </div>
 </section>
 
-<!-- Teaser video-->
+<!-- Teaser image -->
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <video poster="" id="tree" autoplay controls muted loop height="100%">
-        <!-- Your video here -->
-        <source src="static/videos/0.mp4" type="video/mp4">
-      </video>
+      <img src="figures/image.png" alt="FRAME Teaser" class="center">
       <h2 class="subtitle has-text-centered">
-        FRAME outperforms state-of-the-art self-supervised models on multiple dense video tasks. The student (FRAME) surpasses the teacher (DINO) by learning to predict current and future features using memory, improving temporal consistency and visual correspondence.
+        FRAME outperforms state-of-the-art self-supervised models (DINO, SiamMAE) on multiple dense video tasks. The student (FRAME) surpasses the teacher (DINO) by learning to predict current and future features using memory, improving temporal consistency and visual correspondence. (Right) Eg: VOS where FRAME improves segmentation of horse and rider. (left) Tasks shown: VOS = Video Object Segmentation, Part Prop. = Part Propagation, Pose Prop. = Pose Propagation, Seg = Semantic Segmentation of current & future frame.
       </h2>
     </div>
   </div>
 </section>
-<!-- End teaser video -->
+
 
 <!-- Paper abstract -->
 <section class="section hero is-light">
@@ -247,7 +260,7 @@
                 <td>47.0</td>
               </tr>
               <tr class="has-background-success-light">
-                <td><strong>FRAME</strong></td>
+                <td><strong>FRAME (ours)</strong></td>
                 <td><strong>ViT-S/16</strong></td>
                 <td><strong>65.7</strong></td>
                 <td><strong>41.2</strong></td>
@@ -268,7 +281,7 @@
                 <td>61.9</td>
               </tr>
               <tr class="has-background-success-light">
-                <td><strong>FRAME</strong></td>
+                <td><strong>FRAME (ours)</strong></td>
                 <td><strong>ViT-S/8</strong></td>
                 <td><strong>73.2</strong></td>
                 <td><strong>47.9</strong></td>
@@ -287,7 +300,7 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column">
-        <h2 class="title is-3">Qualitative Comparison</h2>
+        <h2 class="title is-3">Qualitative Examples</h2>
         <img src="../figures/FRAME_teaser.png" alt="FRAME vs DINO Qualitative Results" style="width: 100%;">
         <h2 class="subtitle has-text-centered">
           Comparison of FRAME and DINO on feature propagation across video frames. FRAME demonstrates greater robustness to viewpoint changes, occlusions, and object reappearances, making it a more suitable video frame encoder.
