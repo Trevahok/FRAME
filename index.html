@@ -338,8 +338,65 @@
   </section>
   <!-- End video carousel -->
 
+  <!-- DINO vs FRAME Comparison -->
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container">
+        <h2 class="title is-3 has-text-centered">DINO vs FRAME Comparison</h2>
+        <div id="dino-frame-carousel" class="carousel results-carousel">
+          <div class="item item-video1 has-text-centered">
+            <video poster="" id="dino-frame1" autoplay controls muted loop class="is-centered">
+              <source src="static/videos/dino_vs_frame/0_html5.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-video2 has-text-centered">
+            <video poster="" id="dino-frame2" autoplay controls muted loop class="is-centered">
+              <source src="static/videos/dino_vs_frame/2_html5.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-video3 has-text-centered">
+            <video poster="" id="dino-frame3" autoplay controls muted loop class="is-centered">
+              <source src="static/videos/dino_vs_frame/11_html5.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-video4 has-text-centered">
+            <video poster="" id="dino-frame4" autoplay controls muted loop class="is-centered">
+              <source src="static/videos/dino_vs_frame/12_html5.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-video5 has-text-centered">
+            <video poster="" id="dino-frame5" autoplay controls muted loop class="is-centered">
+              <source src="static/videos/dino_vs_frame/15_html5.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-video6 has-text-centered">
+            <video poster="" id="dino-frame6" autoplay controls muted loop class="is-centered">
+              <source src="static/videos/dino_vs_frame/16_html5.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-video7 has-text-centered">
+            <video poster="" id="dino-frame7" autoplay controls muted loop class="is-centered">
+              <source src="static/videos/dino_vs_frame/19_html5.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-video8 has-text-centered">
+            <video poster="" id="dino-frame8" autoplay controls muted loop class="is-centered">
+              <source src="static/videos/dino_vs_frame/21_html5.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-video9 has-text-centered">
+            <video poster="" id="dino-frame9" autoplay controls muted loop class="is-centered">
+              <source src="static/videos/dino_vs_frame/29_html5.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End DINO vs FRAME Comparison -->
+
   <!-- Ablation Studies -->
-  <section class="section">
+  <section class="section hero is-light">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column">
@@ -405,15 +462,25 @@
       </div>
     </div>
   </section>
-
   <!-- Semantic Segmentation Results -->
-  <section class="section hero is-light">
+  <section class="section hero">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column">
           <h2 class="title is-3">Semantic Segmentation Performance</h2>
           <div class="content">
-            
+            <div class="columns">
+              <div class="column">
+                <img src="figures/step_anticipation.png" alt="Semantic segmentation on current and future frames" class="center">
+                <p class="has-text-centered"><strong>Semantic segmentation on current and future frames.</strong> </p>
+              </div>
+              <div class="column">
+                <img src="figures/performance_chart_1.png" alt="Comparison of FRAME and DINO across model scales" class="center">
+                <p class="has-text-centered"><strong>Comparison of FRAME and DINO across model scales.</strong> </p>
+              </div>
+            </div>
+            <div class="columns is-centered">
+              <div class="column is-8">
                 <table class="table is-bordered is-striped is-narrow">
                   <thead>
                     <tr>
@@ -432,27 +499,6 @@
                       <td>36.4</td>
                       <td>25.6</td>
                     </tr>
-                    <tr>
-                      <td>SiamMAE ViT-S/16</td>
-                      <td>59.5</td>
-                      <td>47.8</td>
-                      <td>34.7</td>
-                      <td>24.9</td>
-                    </tr>
-                    <tr>
-                      <td>CatMAE ViT-S/16</td>
-                      <td>58.9</td>
-                      <td>46.2</td>
-                      <td>35.1</td>
-                      <td>25.1</td>
-                    </tr>
-                    <tr>
-                      <td>CropMAE ViT-S/16</td>
-                      <td>56.4</td>
-                      <td>47.9</td>
-                      <td>35.8</td>
-                      <td>23.7</td>
-                    </tr>
                     <tr class="has-background-success-light">
                       <td><strong>FRAME ViT-S/16</strong></td>
                       <td><strong>62.8</strong></td>
@@ -466,13 +512,6 @@
                       <td>51.1</td>
                       <td>35.9</td>
                       <td>25.8</td>
-                    </tr>
-                    <tr>
-                      <td>CatMAE ViT-S/8</td>
-                      <td>58.9</td>
-                      <td>50.5</td>
-                      <td>34.7</td>
-                      <td>25.4</td>
                     </tr>
                     <tr class="has-background-success-light">
                       <td><strong>FRAME ViT-S/8</strong></td>
@@ -497,6 +536,7 @@
                     </tr>
                   </tbody>
                 </table>
+              </div>
             </div>
           </div>
         </div>
@@ -505,8 +545,8 @@
   </section>
 
   <!--BibTex citation -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
+  <!-- <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content is-dark">
       <h2 class="title">BibTeX</h2>
       <pre><code>@article{frame2025,
   title={FRAME: Feature Representation and Anticipation with Memory},
@@ -515,9 +555,8 @@
   year={2025}
 }</code></pre>
     </div>
-  </section>
+  </section> -->
   <!--End BibTex citation -->
-
 
 </body>
 
