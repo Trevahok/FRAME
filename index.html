@@ -342,7 +342,7 @@
   <section class="hero is-small">
     <div class="hero-body">
       <div class="container">
-        <h2 class="title is-3 has-text-centered">DINO (Left) vs FRAME (Right) Comparison</h2>
+        <h2 class="title is-3 has-text-centered">DINO (Left) vs FRAME (Right) - Comparison</h2>
         <div id="dino-frame-carousel" class="carousel results-carousel">
           <div class="item item-video1 has-text-centered">
             <video poster="" id="dino-frame1" autoplay controls muted loop class="is-centered">
@@ -463,81 +463,80 @@
     </div>
   </section>
   <!-- Semantic Segmentation Results -->
-  <section class="section hero">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column">
-          <h2 class="title is-3">Semantic Segmentation Performance</h2>
-          <div class="content">
-            <div class="columns">
-              <div class="column">
-                <img src="figures/step_anticipation.png" alt="Semantic segmentation on current and future frames" class="center">
-                <p class="has-text-centered"><strong>Semantic segmentation on current and future frames.</strong> </p>
-              </div>
-              <div class="column is-8">
-                <table class="table is-bordered is-striped is-narrow">
-                  <thead>
-                    <tr>
-                      <th>Model</th>
-                      <th>CamVid Current</th>
-                      <th>CamVid Future</th>
-                      <th>VSPW Current</th>
-                      <th>VSPW Future</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>DINO ViT-S/16</td>
-                      <td>60.1</td>
-                      <td>50.2</td>
-                      <td>36.4</td>
-                      <td>25.6</td>
-                    </tr>
-                    <tr class="has-background-success-light">
-                      <td><strong>FRAME ViT-S/16</strong></td>
-                      <td><strong>62.8</strong></td>
-                      <td><strong>53.9</strong></td>
-                      <td><strong>38.9</strong></td>
-                      <td><strong>28.3</strong></td>
-                    </tr>
-                    <tr>
-                      <td>DINO ViT-S/8</td>
-                      <td>59.6</td>
-                      <td>51.1</td>
-                      <td>35.9</td>
-                      <td>25.8</td>
-                    </tr>
-                    <tr class="has-background-success-light">
-                      <td><strong>FRAME ViT-S/8</strong></td>
-                      <td><strong>62.6</strong></td>
-                      <td><strong>54.0</strong></td>
-                      <td><strong>38.0</strong></td>
-                      <td><strong>27.4</strong></td>
-                    </tr>
-                    <tr>
-                      <td>DINOv2 ViT-L/14</td>
-                      <td>68.3</td>
-                      <td>56.1</td>
-                      <td>41.8</td>
-                      <td>30.3</td>
-                    </tr>
-                    <tr class="has-background-success-light">
-                      <td><strong>FRAME ViT-L/14</strong></td>
-                      <td><strong>69.8</strong></td>
-                      <td><strong>59.2</strong></td>
-                      <td><strong>44.0</strong></td>
-                      <td><strong>33.8</strong></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+<section class="section hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <h2 class="title is-3">Semantic Segmentation and Anticipation</h2>
+        <div class="content">
+          <div class="columns">
+            <div class="column is-7">
+              <img src="figures/step_anticipation.png" alt="Semantic segmentation on current and future frames" class="center">
+              <p class="has-text-centered"><strong>Semantic segmentation on current and future frames.</strong> </p>
+            </div>
+            <div class="column is-5">
+              <table class="table is-bordered is-striped is-narrow">
+                <thead>
+                  <tr>
+                    <th>Model</th>
+                    <th>CamVid Current</th>
+                    <th>CamVid Future</th>
+                    <th>VSPW Current</th>
+                    <th>VSPW Future</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>DINO ViT-S/16</td>
+                    <td>60.1</td>
+                    <td>50.2</td>
+                    <td>36.4</td>
+                    <td>25.6</td>
+                  </tr>
+                  <tr class="has-background-success-light">
+                    <td><strong>FRAME ViT-S/16</strong></td>
+                    <td><strong>62.8</strong></td>
+                    <td><strong>53.9</strong></td>
+                    <td><strong>38.9</strong></td>
+                    <td><strong>28.3</strong></td>
+                  </tr>
+                  <tr>
+                    <td>DINO ViT-S/8</td>
+                    <td>59.6</td>
+                    <td>51.1</td>
+                    <td>35.9</td>
+                    <td>25.8</td>
+                  </tr>
+                  <tr class="has-background-success-light">
+                    <td><strong>FRAME ViT-S/8</strong></td>
+                    <td><strong>62.6</strong></td>
+                    <td><strong>54.0</strong></td>
+                    <td><strong>38.0</strong></td>
+                    <td><strong>27.4</strong></td>
+                  </tr>
+                  <tr>
+                    <td>DINOv2 ViT-L/14</td>
+                    <td>68.3</td>
+                    <td>56.1</td>
+                    <td>41.8</td>
+                    <td>30.3</td>
+                  </tr>
+                  <tr class="has-background-success-light">
+                    <td><strong>FRAME ViT-L/14</strong></td>
+                    <td><strong>69.8</strong></td>
+                    <td><strong>59.2</strong></td>
+                    <td><strong>44.0</strong></td>
+                    <td><strong>33.8</strong></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
-
+  </div>
+</section>
   <!-- Comparison of Performance vs Parameters -->
   <section class="section hero is-light">
     <div class="container is-max-desktop">
