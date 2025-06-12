@@ -291,19 +291,16 @@
           <h2 class="title is-3 fade-in-up">Abstract</h2>
           <div class="content has-text-justified slide-in-left">
             <p>
-              Dense video prediction tasks, such as object tracking and semantic segmentation, require video encoders
-              that generate temporally consistent, spatially dense features for every frame. However, existing
-              approaches fall short: image encoders like DINO or CLIP lack temporal awareness, while video models such
-              as VideoMAE underperform compared to image encoders on dense prediction tasks. We address this gap with
-              <strong>FRAME</strong>, a self-supervised video frame encoder tailored for dense video understanding.
-              FRAME learns to predict current and future DINO patch features from past and present RGB frames, leading
-              to spatially precise and temporally coherent representations. To our knowledge, FRAME is the first video
-              encoder to leverage image-based models for dense prediction while outperforming them on tasks requiring
-              fine-grained visual correspondence. As an auxiliary capability, FRAME aligns its class token with CLIP's
-              semantic space, supporting language-driven tasks such as video classification. We evaluate FRAME across
-              <em>six dense prediction tasks</em> on <em>seven datasets</em>, where it consistently outperforms image
-              encoders and existing self-supervised video models. Despite its versatility, FRAME maintains a compact
-              architecture suitable for a range of downstream applications.
+              <strong>The Task:</strong> Dense video prediction tasks, such as object tracking and semantic segmentation, require video encoders that generate temporally consistent, spatially dense features for every frame.
+            </p>
+            <p>
+              <strong>What's Missing:</strong> Existing approaches fall short: image encoders like DINO or CLIP lack temporal awareness, while video models such as VideoMAE underperform compared to image encoders on dense prediction tasks.
+            </p>
+            <p>
+              <strong>Our Solution:</strong> We address this gap with <strong>FRAME</strong>, a self-supervised video frame encoder tailored for dense video understanding. FRAME learns to predict current and future DINO patch features from past and present RGB frames, leading to spatially precise and temporally coherent representations. To our knowledge, FRAME is the first video encoder to leverage image-based models for dense prediction while outperforming them on tasks requiring fine-grained visual correspondence. As an auxiliary capability, FRAME aligns its class token with CLIP's semantic space, supporting language-driven tasks such as video classification.
+            </p>
+            <p>
+              <strong>Our Performance:</strong> We evaluate FRAME across <em>six dense prediction tasks</em> on <em>seven datasets</em>, where it consistently outperforms image encoders and existing self-supervised video models. Despite its versatility, FRAME maintains a compact architecture suitable for a range of downstream applications.
             </p>
           </div>
         </div>
@@ -320,8 +317,8 @@
           <h2 class="title is-3 fade-in-up">Method Overview</h2>
           <div class="content has-text-justified slide-in-right">
             <p>
-              FRAME is trained in two stages. In Stage 1, we train a student encoder to match dense patch-level and
-              class-level features from frozen image-based teacher models (DINO and CLIP). In Stage 2, we equip the
+              FRAME is trained in <strong>two stages</strong>. In <strong>Stage 1</strong>, we train a student encoder to match dense patch-level and
+              class-level features from frozen image-based teacher models (DINO and CLIP). In <strong>Stage 2</strong>, we equip the
               student with lightweight temporal modules—a memory unit that aggregates past context and an anticipation
               unit that predicts future features.
             </p>
@@ -397,9 +394,9 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column">
-          <h2 class="title is-3 fade-in-up">Performance Comparison</h2>
+          <h2 class="title is-3 fade-in-up">Performance Comparison in Visual Correspondance tasks</h2>
           <div class="content scale-in">
-            <p>FRAME substantially outperforms existing self-supervised methods on visual correspondence tasks:</p>
+            <p>FRAME substantially outperforms existing self-supervised methods on visual correspondence tasks which indicates feature consistency.</p>
 
             <table class="table is-bordered is-striped is-narrow is-hoverable">
               <thead>
@@ -473,7 +470,7 @@
           </div>
           <h2 class="subtitle has-text-centered slide-in-right">
             Comparison of FRAME and DINO on feature propagation across video frames. FRAME demonstrates greater
-            robustness to viewpoint changes, occlusions, and object reappearances, making it a more suitable video frame
+            robustness to <strong>viewpoint changes, occlusions, and object reappearances </strong>, making it a more suitable video frame
             encoder.
           </h2>
         </div>
